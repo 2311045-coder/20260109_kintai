@@ -46,6 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <button type="submit">出勤</button>
 </form>
 
-<a href="list.php">一覧へ</a>
+<a href="all_work.php">一覧へ</a>
 </body>
 </html>
