@@ -157,6 +157,6 @@ body.clock-out button { background: #1d4ed8; }
       <button type="submit">退勤する</button>
     </form>
   </div>
-</div>
+ </div>
 </body>
 </html>
