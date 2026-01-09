@@ -138,19 +138,20 @@ body.clock-in button { background: #16a34a; }
     <?php endif; ?>
 
     <form method="post">
-      <select name="jugyoin_id" required>
-        <option value="">従業員を選択</option>
-        <?php foreach ($jugyoinList as $j): ?>
-          <option value="<?= $j['jugyoin_id'] ?>">
-            <?= htmlspecialchars($j['jugyoin_id']) ?> ：<?= htmlspecialchars($j['name']) ?>
-          </option>
-        <?php endforeach; ?>
-      </select>
+  <select name="jugyoin_id" required>
+    <option value="">従業員を選択</option>
+    <?php foreach ($jugyoinList as $j): ?>
+      <option value="<?= $j['jugyoin_id'] ?>">
+        <?= htmlspecialchars($j['name']) ?>
+      </option>
+    <?php endforeach; ?>
+  </select>
 
-      <input type="time" name="time" value="<?= $nowTime ?>" required>
+  <input type="time" name="time" value="<?= $nowTime ?>" required>
 
-      <button type="submit">出勤する</button>
-    </form>
+  <button type="submit">出勤する</button>
+</form>
+
   </div>
 </div>
 </body>
