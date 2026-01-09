@@ -2,39 +2,50 @@
 require 'db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_POST['name'];
-    $date = date('Y-m-d');
-    $time = date('H:i:s');
+    $jugyoin_id = $_POST['jugyoin_id'];
+    $today = date('Y-m-d');
+    $now = date('Y-m-d H:i:s');
 
-    $sql = "INSERT INTO attendance (employee_name, work_date, clock_in)
-            VALUES (:name, :work_date, :clock_in)";
+    // 同日の出勤があるか確認
+    $sql = "SELECT COUNT(*) FROM kiroku
+            WHERE jugyoin_id = :id
+              AND DATE(start_work) = :today";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
-        ':name' => $name,
-        ':work_date' => $date,
-        ':clock_in' => $time
+        ':id' => $jugyoin_id,
+        ':today' => $today
     ]);
 
-    $message = "出勤を記録しました。";
+    if ($stmt->fetchColumn() == 0) {
+        $sql = "INSERT INTO kiroku (jugyoin_id, start_work)
+                VALUES (:id, :start)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            ':id' => $jugyoin_id,
+            ':start' => $now
+        ]);
+        $message = "出勤を記録しました。";
+    } else {
+        $message = "本日はすでに出勤記録があります。";
+    }
 }
 ?>
 
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>出勤入力</title>
-</head>
+<meta charset="UTF-8">
+<title>出勤入力</title>
 <body>
-<h2>出勤時刻入力</h2>
+<h2>出勤入力</h2>
 
-<?php if (!empty($message)) echo "<p>$message</p>"; ?>
+<p><?= $message ?? '' ?></p>
 
 <form method="post">
-    従業員名：<input type="text" name="name" required>
+    従業員番号：
+    <input type="number" name="jugyoin_id" required>
     <button type="submit">出勤</button>
 </form>
 
-<p><a href="list.php">一覧画面へ</a></p>
+<a href="list.php">一覧へ</a>
 </body>
 </html>
