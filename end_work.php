@@ -120,6 +120,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       margin-bottom: 20px;
     }
 
+    .nav a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+        margin-left: 16px;
+    }
+
+    .nav a:hover {
+        text-decoration: underline;
+    }
+
     /* ===== 退勤（青） ===== */
     body.clock-out header { background: #3b82f6; }
     body.clock-out button { background: #1d4ed8; }
@@ -137,7 +148,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <header>
   <h1>退勤打刻</h1>
-  <div><?= date('Y/m/d') ?></div>
+  <div class="nav">
+    <span><?= date('Y/m/d') ?></span>
+    <a href="all_work.php">一覧</a>
+    <a href="start_work.php">出勤</a>
+  </div>
 </header>
 
 <div class="container">

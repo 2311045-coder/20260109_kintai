@@ -80,6 +80,18 @@ $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
       background: #fff7ed;
     }
 
+    .nav a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+        margin-left: 16px;
+    }
+
+    .nav a:hover {
+        text-decoration: underline;
+    }
+
+
     /* ===== 一覧（オレンジ） ===== */
     body.record header { background: #f59e0b; }
   </style>
@@ -89,7 +101,10 @@ $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <header>
   <h1>勤務記録一覧</h1>
-  <div><?= date('Y/m/d') ?></div>
+  <div class="nav">
+    <span><?= date('Y/m/d') ?></span>
+    <a href="start_work.php">出勤</a>
+    <a href="end_work.php">退勤</a>
 </header>
 
 <div class="container">

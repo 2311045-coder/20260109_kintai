@@ -110,6 +110,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       color: #065f46;
       font-weight: bold;
     }
+
+    .nav a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+        margin-left: 16px;
+    }
+
+    .nav a:hover {
+        text-decoration: underline;
+    }
   </style>
 </head>
 
@@ -117,7 +128,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <header>
   <h1>出勤打刻</h1>
-  <div><?= date('Y/m/d') ?></div>
+  <div class="nav">
+    <span><?= date('Y/m/d') ?></span>
+    <a href="all_work.php">一覧</a>
+    <a href="end_work.php">退勤</a>
+  </div>
 </header>
 
 <div class="container">
